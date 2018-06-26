@@ -39,6 +39,21 @@ public abstract class ActivityManagerService implements IBinder {
         }
     }
 
+    // For MIUI-Ng
+    final ProcessRecord startProcessLocked(String processName, ApplicationInfo info,
+                                           boolean knownToBeDead, int intentFlags, String hostingType, ComponentName hostingName,
+                                           boolean allowWhileBooting, boolean isolated, int isolatedUid, boolean keepIfLarge,
+                                           String abiOverride, String entryPoint, String[] entryPointArgs, Runnable crashHandler, String uknown) {
+        if (PreventRunningUtils.hookStartProcessLocked(processName, info, knownToBeDead, intentFlags, hostingType, hostingName)) {
+            return startProcessLocked$Pr(processName, info,
+                    knownToBeDead, intentFlags, hostingType, hostingName,
+                    allowWhileBooting, isolated, isolatedUid, keepIfLarge,
+                    abiOverride, entryPoint, entryPointArgs, crashHandler, uknown);
+        } else {
+            return null;
+        }
+    }
+
     // 19
     final ProcessRecord startProcessLocked(String processName,
                                            ApplicationInfo info, boolean knownToBeDead, int intentFlags,
@@ -258,6 +273,13 @@ public abstract class ActivityManagerService implements IBinder {
                                               boolean knownToBeDead, int intentFlags, String hostingType, ComponentName hostingName,
                                               boolean allowWhileBooting, boolean isolated, int isolatedUid, boolean keepIfLarge,
                                               String abiOverride, String entryPoint, String[] entryPointArgs, Runnable crashHandler) {
+        throw new UnsupportedOperationException();
+    }
+
+    final ProcessRecord startProcessLocked$Pr(String processName, ApplicationInfo info,
+                                              boolean knownToBeDead, int intentFlags, String hostingType, ComponentName hostingName,
+                                              boolean allowWhileBooting, boolean isolated, int isolatedUid, boolean keepIfLarge,
+                                              String abiOverride, String entryPoint, String[] entryPointArgs, Runnable crashHandler, String uknown) {
         throw new UnsupportedOperationException();
     }
 
