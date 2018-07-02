@@ -242,7 +242,7 @@ public class PreventActivity extends Activity implements ViewPager.OnPageChangeL
         removeMenu.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         removeMenu.setVisible(false);
         menu.add(Menu.NONE, R.string.switch_theme, Menu.NONE, R.string.switch_theme);
-        menu.add(Menu.NONE, R.string.report_bug, Menu.NONE, R.string.report_bug);
+        //~ menu.add(Menu.NONE, R.string.report_bug, Menu.NONE, R.string.report_bug);
         menu.add(Menu.NONE, R.string.user_guide, Menu.NONE, R.string.user_guide);
         return super.onCreateOptionsMenu(menu);
     }
@@ -252,9 +252,9 @@ public class PreventActivity extends Activity implements ViewPager.OnPageChangeL
         int id = item.getItemId();
         if (id == R.string.switch_theme) {
             return switchTheme();
-        } else if (id == R.string.report_bug) {
-            requestLog();
-            return true;
+        //~ } else if (id == R.string.report_bug) {
+            //~ requestLog();
+            //~ return true;
         } else {
             return onClick(id);
         }
@@ -449,12 +449,12 @@ public class PreventActivity extends Activity implements ViewPager.OnPageChangeL
                 fixDisabled();
             }
         });
-        builder.setNeutralButton(R.string.report_bug, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                reportBug();
-            }
-        });
+        //~ builder.setNeutralButton(R.string.report_bug, new DialogInterface.OnClickListener() {
+            //~ @Override
+            //~ public void onClick(DialogInterface dialog, int which) {
+                //~ reportBug();
+            //~ }
+        //~ });
         builder.create().show();
     }
 

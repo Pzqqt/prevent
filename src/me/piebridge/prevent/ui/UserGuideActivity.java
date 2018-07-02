@@ -98,18 +98,18 @@ public class UserGuideActivity extends Activity implements View.OnClickListener 
             webView.loadUrl("file:///android_asset/" + path);
             UILog.d("cannot open " + path, e);
         }
-        setView(R.id.alipay, "com.eg.android.AlipayGphone");
-        if (hasPermission()) {
-            setView(R.id.wechat, "com.tencent.mm");
-        } else {
-            findViewById(R.id.wechat).setVisibility(View.GONE);
-        }
-        if (!setView(R.id.paypal, "com.paypal.android.p2pmobile")) {
-            TextView paypal = (TextView) findViewById(R.id.paypal);
-            paypal.setClickable(true);
-            paypal.setOnClickListener(this);
-            paypal.setCompoundDrawablesWithIntrinsicBounds(null, cropDrawable(paypal.getCompoundDrawables()[1]), null, null);
-        }
+        //~ setView(R.id.alipay, "com.eg.android.AlipayGphone");
+        //~ if (hasPermission()) {
+            //~ setView(R.id.wechat, "com.tencent.mm");
+        //~ } else {
+            //~ findViewById(R.id.wechat).setVisibility(View.GONE);
+        //~ }
+        //~ if (!setView(R.id.paypal, "com.paypal.android.p2pmobile")) {
+            //~ TextView paypal = (TextView) findViewById(R.id.paypal);
+            //~ paypal.setClickable(true);
+            //~ paypal.setOnClickListener(this);
+            //~ paypal.setCompoundDrawablesWithIntrinsicBounds(null, cropDrawable(paypal.getCompoundDrawables()[1]), null, null);
+        //~ }
         retrieveInfo();
     }
 
@@ -211,13 +211,13 @@ public class UserGuideActivity extends Activity implements View.OnClickListener 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                donateViaWeChat();
-            } else {
-                findViewById(R.id.wechat).setVisibility(View.GONE);
-            }
-        }
+        //~ if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+            //~ if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //~ donateViaWeChat();
+            //~ } else {
+                //~ findViewById(R.id.wechat).setVisibility(View.GONE);
+            //~ }
+        //~ }
     }
 
     private void refreshQrCode(File qrCode) {
@@ -287,14 +287,14 @@ public class UserGuideActivity extends Activity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.wechat) {
-            donateViaWeChat();
-        } else if (id == R.id.alipay) {
-            donateViaAlipay();
-        } else if (id == R.id.paypal) {
-            donateViaPayPal();
-        }
+        //~ int id = v.getId();
+        //~ if (id == R.id.wechat) {
+            //~ donateViaWeChat();
+        //~ } else if (id == R.id.alipay) {
+            //~ donateViaAlipay();
+        //~ } else if (id == R.id.paypal) {
+            //~ donateViaPayPal();
+        //~ }
     }
 
     @Override

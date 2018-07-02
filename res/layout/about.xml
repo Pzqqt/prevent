@@ -11,6 +11,4 @@
         android:layout_weight="1.0"
         android:background="?android:attr/colorBackground" />
 
-    <include layout="@layout/donate" />
-
 </LinearLayout>
