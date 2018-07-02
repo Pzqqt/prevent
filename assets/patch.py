@@ -227,6 +227,7 @@ class ActivityManagerService(Patch):
     methods = None
     pkg_deps = ''
     extra_count = 0
+    method_name_sp = ""
 
     # 使用大括号创建了一个仅包含键的字典 称之为集合
     # 特点: 检索迅速 不会有重复值
@@ -262,6 +263,7 @@ class ActivityManagerService(Patch):
 
         if line.startswith(".method"):
             method_signature = line_strip
+            self.method_name_sp = self.find_method_name(line_strip)
             # 如果method体第一行在self.methods里也有
             if method_signature in self.methods:
                 # 从self.methods中取出method名和method完整语句体
@@ -286,25 +288,28 @@ class ActivityManagerService(Patch):
                          " Lcom/android/server/am/PreventRunningUtils;->returnFalse()Z")
             output.write(os.linesep)
             # 此处patch比较特殊 故使用self.extra_count来特殊计数
-            # 为什么特殊？
-            # 正常情况下 Android 4.4需要打14处补丁 Android 5.0以上需要打15处补丁
-            # 所以...
+            # 为什么特殊？此处Patch在4.4下是打不上的
             self.extra_count += 1
             self.pkg_deps = ''
             return True
 
-        if line_strip.startswith('iget-object'):
-            # self.pkg_deps用来设置一个flag 因为此行之后的一行需要重写
-            # 对此行以"iget-object"开头的语句进行判断
-            if 'Lcom/android/server/am/ProcessRecord;->pkgDeps:Landroid/util/ArraySet;' in line_strip:
-                self.pkg_deps = line_strip
-            else:
-                self.pkg_deps = ''
+        # 此处Patch仅用于killPackageProcessesLocked方法
+        # 在8.x中 有可能会给getPackageProcessState方法也打上补丁
+        # 这样做是多余的 而且可能会导致明显的系统卡顿
+        # 所以这里添加一个额外的条件判断
+        if self.method_name_sp == "killPackageProcessesLocked":
+            if line_strip.startswith('iget-object'):
+                # self.pkg_deps用来设置一个flag 因为此行之后的一行需要重写
+                # 对此行以"iget-object"开头的语句进行判断
+                if 'Lcom/android/server/am/ProcessRecord;->pkgDeps:Landroid/util/ArraySet;' in line_strip:
+                    self.pkg_deps = line_strip
+                else:
+                    self.pkg_deps = ''
 
     def get_patch_count(self):
         # 4.4 必打 8+0 处补丁
         # 5.x ~ 7.x 必打 8+1 处补丁
-        # 8.x 只打 7+1 或 7+2 处补丁 属于正常情况
+        # 8.x 只打 7+1 处补丁 属于正常情况
         global oreo_flag
         if oreo_flag:
             return 7 + self.extra_count
