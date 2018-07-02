@@ -128,8 +128,8 @@ public class PreventActivity extends Activity implements ViewPager.OnPageChangeL
 
         if (PreventIntent.ACTION_NOT_SUPPORTED.equals(getIntent().getAction())) {
             reportBug();
-        } else if (!BuildConfig.RELEASE) {
-            showTestDialog();
+        //~ } else if (!BuildConfig.RELEASE) {
+            //~ showTestDialog();
         } else {
             initialize();
         }
@@ -481,32 +481,32 @@ public class PreventActivity extends Activity implements ViewPager.OnPageChangeL
         return Uri.fromParts("package", getPackageName(), null);
     }
 
-    private void showTestDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.app_name) + "(" + BuildConfig.VERSION_NAME + ")");
-        builder.setMessage(R.string.soak_version);
-        builder.setIcon(R.drawable.ic_launcher);
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                finish();
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(Intent.ACTION_DELETE, getPackage()));
-                finish();
-            }
-        });
-        builder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                initialize();
-            }
-        });
-        builder.create().show();
-    }
+    //~ private void showTestDialog() {
+        //~ AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //~ builder.setTitle(getString(R.string.app_name) + "(" + BuildConfig.VERSION_NAME + ")");
+        //~ builder.setMessage(R.string.soak_version);
+        //~ builder.setIcon(R.drawable.ic_launcher);
+        //~ builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            //~ @Override
+            //~ public void onCancel(DialogInterface dialog) {
+                //~ finish();
+            //~ }
+        //~ });
+        //~ builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            //~ @Override
+            //~ public void onClick(DialogInterface dialog, int which) {
+                //~ startActivity(new Intent(Intent.ACTION_DELETE, getPackage()));
+                //~ finish();
+            //~ }
+        //~ });
+        //~ builder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+            //~ @Override
+            //~ public void onClick(DialogInterface dialog, int which) {
+                //~ initialize();
+            //~ }
+        //~ });
+        //~ builder.create().show();
+    //~ }
 
     private PreventFragment getCurrentFragment() {
         return getFragment(mPager.getCurrentItem());
