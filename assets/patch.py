@@ -312,7 +312,7 @@ class ActivityManagerService(Patch):
         # 8.x 只打 7+1 处补丁 属于正常情况
         global oreo_flag
         if oreo_flag:
-            return 7 + self.extra_count
+            return 8
         else:
             return 8 + self.extra_count
 
