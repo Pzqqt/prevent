@@ -37,8 +37,7 @@ public class PreventRunning implements PreventRunningHook {
     public PreventRunning() {
         for (String apk : APKS) {
             File file = new File(apk);
-            if (file.exists()) {
-                initPreventRunning(file);
+            if (file.exists() && initPreventRunning(file)) {
                 break;
             }
         }
