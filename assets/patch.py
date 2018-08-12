@@ -295,8 +295,7 @@ class ActivityManagerService(Patch):
 
         # 此处Patch仅用于killPackageProcessesLocked方法
         # 在8.x中 有可能会给getPackageProcessState方法也打上补丁
-        # 这样做是多余的 而且可能会导致明显的系统卡顿
-        # 所以这里添加一个额外的条件判断
+        # 这样做是多余的 所以这里添加一个额外的条件判断
         if self.method_name_sp == "killPackageProcessesLocked":
             if line_strip.startswith('iget-object'):
                 # self.pkg_deps用来设置一个flag 因为此行之后的一行需要重写
