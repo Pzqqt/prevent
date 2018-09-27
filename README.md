@@ -75,10 +75,6 @@ This process is running the foreground UI, but the device is asleep so it is not
 
 This process is running something that is actively visible to the user, though not in the immediate foreground. This may be running a window that is behind the current foreground (so paused and with its state saved, not interacting with the user, but visible to them to some degree); it may also be running other services under the system's control that it inconsiders important.
 
-## Project
-
-Project: [Brevent - GitHub](https://github.com/liudongmiao/Brevent). If you like, feel free to donate.
-
 # 中文
 
 ## 黑域介绍
@@ -158,7 +154,3 @@ Project: [Brevent - GitHub](https://github.com/liudongmiao/Brevent). If you like
 ### 可见(visible)
 
 进程对用户可见，虽然不一定是最近的前台。它可能运行在当前前台后的窗口，虽然已经暂停并且保存状态，也无法使用，但是某种层次上用户能见到；也可能是系统控制下的其它重要服务。
-
-## 项目
-
-“`黑域`”<del>代码暂时不</del>开源，项目地址：[Brevent - GitHub](https://github.com/liudongmiao/Brevent)。如果喜欢，请随意捐赠。
