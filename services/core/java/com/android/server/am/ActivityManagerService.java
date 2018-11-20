@@ -118,6 +118,14 @@ public abstract class ActivityManagerService implements IBinder {
         }
     }
 
+    private final void handleAppDiedLocked(ProcessRecord app,
+                                           boolean restarting, boolean allowRestart, boolean uknown) {
+        handleAppDiedLocked$Pr(app, restarting, allowRestart, uknown);
+        if (!restarting && allowRestart && !app.killedByAm) {
+            PreventRunningUtils.onAppDied(app);
+        }
+    }
+
     // 24
     // check tr.getBaseIntent
     private void cleanUpRemovedTaskLocked(TaskRecord tr, boolean killProcess,
@@ -328,6 +336,11 @@ public abstract class ActivityManagerService implements IBinder {
 
     private final void handleAppDiedLocked$Pr(ProcessRecord app,
                                               boolean restarting, boolean allowRestart) {
+        throw new UnsupportedOperationException();
+    }
+
+    private final void handleAppDiedLocked$Pr(ProcessRecord app,
+                                              boolean restarting, boolean allowRestart, boolean uknown) {
         throw new UnsupportedOperationException();
     }
 
