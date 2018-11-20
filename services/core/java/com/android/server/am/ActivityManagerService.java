@@ -69,6 +69,21 @@ public abstract class ActivityManagerService implements IBinder {
         }
     }
 
+    // For some samsung rom
+    final ProcessRecord startProcessLocked(String processName,
+                                           ApplicationInfo info, boolean knownToBeDead, int intentFlags,
+                                           String hostingType, ComponentName hostingName, boolean allowWhileBooting,
+                                           boolean isolated, boolean keepIfLarge, boolean uknown) {
+        if (PreventRunningUtils.hookStartProcessLocked(processName, info, knownToBeDead, intentFlags, hostingType, hostingName)) {
+            return startProcessLocked$Pr(processName,
+                    info, knownToBeDead, intentFlags,
+                    hostingType, hostingName, allowWhileBooting,
+                    isolated, keepIfLarge, uknown);
+        } else {
+            return null;
+        }
+    }
+
     // 24, 23, 22, 21
     public final int startActivity(IApplicationThread caller, String callingPackage,
                                    Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode,
@@ -287,6 +302,13 @@ public abstract class ActivityManagerService implements IBinder {
                                               ApplicationInfo info, boolean knownToBeDead, int intentFlags,
                                               String hostingType, ComponentName hostingName, boolean allowWhileBooting,
                                               boolean isolated, boolean keepIfLarge) {
+        throw new UnsupportedOperationException();
+    }
+
+    final ProcessRecord startProcessLocked$Pr(String processName,
+                                              ApplicationInfo info, boolean knownToBeDead, int intentFlags,
+                                              String hostingType, ComponentName hostingName, boolean allowWhileBooting,
+                                              boolean isolated, boolean keepIfLarge, boolean uknown) {
         throw new UnsupportedOperationException();
     }
 
